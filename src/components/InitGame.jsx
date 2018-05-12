@@ -9,47 +9,59 @@ import {
   ControlLabel
 } from "react-bootstrap";
 import Players from "./Players.jsx";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import uuidv1 from "uuid";
+import { addPlayer } from "../actions/index";
 
-class InitGame extends React.Component {
-  constructor(props) {
-    super(props);
+const mapDispatchToProps = dispatch => {
+  return {
+    addPlayer: players => dispatch(addPlayer(players))
+  };
+};
+
+class ConnectedInitGame extends Component {
+  constructor() {
+    super();
     this.state = {
-      name: "",
-      players: []
+      name: ""
     };
     this.initializeGame = this.initializeGame.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  onChange = event => {
-    this.setState({ name: event.target.value });
-  };
-  onSubmit = event => {
+  handleChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+  handleSubmit(event) {
     event.preventDefault();
-    this.setState({
-      name: "",
-      players: [...this.state.players, this.state.name]
-    });
-  };
+    const { name } = this.state;
+    const id = uuidv1();
+    this.props.addPlayer({ name, id});
+    this.setState({ name: "" });
+  }
   initializeGame(e) {
     e.preventDefault();
     this.props.history.push("/game");
   }
   render() {
+    const { name } = this.state;
     return (
       <div>
         <Row>
           <Col md={12}>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <ControlLabel>Who might you be?</ControlLabel>
-                <FormControl value={this.state.name} onChange={this.onChange} />
-                <Button type="submit">Join</Button>
+                <FormControl id="name" type="text" value={name} onChange={this.handleChange} />
               </FormGroup>
+              <Button type="submit">Join</Button>
             </form>
           </Col>
         </Row>
         <Row>
           <Col md={12}>
-            <Players players={this.state.players} />
+          <Players />
           </Col>
         </Row>
         <Row>
@@ -63,5 +75,11 @@ class InitGame extends React.Component {
     );
   }
 }
+
+const InitGame= connect(null, mapDispatchToProps)(ConnectedInitGame);
+
+ConnectedInitGame.propTypes = {
+  addPlayer: PropTypes.func.isRequired
+};
 
 export default withRouter(InitGame);

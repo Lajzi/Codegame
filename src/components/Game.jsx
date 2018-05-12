@@ -8,14 +8,16 @@ import {
   Button,
   ControlLabel
 } from "react-bootstrap";
+import Players from "./Players.jsx";
 
 class Game extends Component {
   render() {
     return (
-      <Grid className="App">
+      <Grid>
         <Row>
           <Col md={12}>
             <div>Spel!!!</div>
+            <Players />
           </Col>
         </Row>
       </Grid>

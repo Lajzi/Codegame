@@ -6,3 +6,11 @@ h1 {
     font-size: $base-font-size * 4;
     font-family: $custom-font;
 }
+
+p, label, a, button, .btn {
+    font-size: $base-font-size * 1.5;
+}
+
+.glyphicon {
+    font-size: $base-font-size;
+}

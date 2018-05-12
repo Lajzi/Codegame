@@ -1,10 +1,27 @@
 import React, { Component } from "react";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { ListGroup, ListGroupItem, Glyphicon } from "react-bootstrap";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const Players = props => (
+const mapStateToProps = state => {
+  return { players: state.players };
+};
+
+const ConnectedPlayers = ({ players }) => (
   <ListGroup>
-    {props.players.map((players, index) => <ListGroupItem key={index}>{players}</ListGroupItem>)}
+    {players.map(el => (
+      <li className="list-group-item" key={el.id}>
+        {el.name}
+        <Glyphicon className="push-right" glyph="remove" />
+      </li>
+    ))}
   </ListGroup>
 );
+
+const Players = connect(mapStateToProps)(ConnectedPlayers);
+
+ConnectedPlayers.propTypes = {
+  players: PropTypes.array.isRequired
+};
 
 export default Players;
