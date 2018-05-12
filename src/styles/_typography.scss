@@ -13,4 +13,10 @@ p, label, a, button, .btn {
 
 .glyphicon {
     font-size: $base-font-size;
+    li & {
+        cursor: pointer;
+        &:hover, &:focus, &:active {
+            color: red;
+        }
+    }
 }

@@ -29,16 +29,24 @@ class ConnectedInitGame extends Component {
     this.initializeGame = this.initializeGame.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
   handleChange(event) {
     this.setState({ [event.target.id]: event.target.value });
   }
   handleSubmit(event) {
     event.preventDefault();
-    const { name } = this.state;
-    const id = uuidv1();
-    this.props.addPlayer({ name, id});
-    this.setState({ name: "" });
+    if (this.state.name != "") {
+      const { name } = this.state;
+      const id = uuidv1();
+      this.props.addPlayer({ name, id });
+      this.setState({ name: "" });
+    } else {
+      alert("You can't add someone who is not... someone, right?");
+    }
+  }
+  handleRemove(event) {
+    console.log("ta bort");
   }
   initializeGame(e) {
     e.preventDefault();
@@ -53,7 +61,12 @@ class ConnectedInitGame extends Component {
             <form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <ControlLabel>Who might you be?</ControlLabel>
-                <FormControl id="name" type="text" value={name} onChange={this.handleChange} />
+                <FormControl
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={this.handleChange}
+                />
               </FormGroup>
               <Button type="submit">Join</Button>
             </form>
@@ -61,7 +74,7 @@ class ConnectedInitGame extends Component {
         </Row>
         <Row>
           <Col md={12}>
-          <Players />
+            <Players />
           </Col>
         </Row>
         <Row>
@@ -76,7 +89,7 @@ class ConnectedInitGame extends Component {
   }
 }
 
-const InitGame= connect(null, mapDispatchToProps)(ConnectedInitGame);
+const InitGame = connect(null, mapDispatchToProps)(ConnectedInitGame);
 
 ConnectedInitGame.propTypes = {
   addPlayer: PropTypes.func.isRequired

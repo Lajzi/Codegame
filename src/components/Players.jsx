@@ -7,12 +7,12 @@ const mapStateToProps = state => {
   return { players: state.players };
 };
 
+
 const ConnectedPlayers = ({ players }) => (
   <ListGroup>
     {players.map(el => (
       <li className="list-group-item" key={el.id}>
         {el.name}
-        <Glyphicon className="push-right" glyph="remove" />
       </li>
     ))}
   </ListGroup>
