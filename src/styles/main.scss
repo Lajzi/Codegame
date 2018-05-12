@@ -11,11 +11,20 @@ header {
 }
 
 .control-label {
-    width: 100%;
+  width: 100%;
 }
 
 .btn {
   margin: $base-margin * 1.25 0;
   min-width: $btn-width;
   float: left;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  background-color: $secondary-color;
+  width: 100%;
+  padding: $base-padding * 2;
+  color: $primary-color;
 }

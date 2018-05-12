@@ -13,6 +13,7 @@ import App from "./App";
 import Header from "./components/Header.jsx";
 import Game from "./components/Game.jsx";
 import Rules from "./components/Rules.jsx";
+import Footer from "./components/Footer.jsx";
 
 class AppNav extends Component {
   render() {
@@ -24,6 +25,7 @@ class AppNav extends Component {
           <Route path="/game" component={Game} />
           <Route path="/rules" component={Rules} />
         </Switch>
+        <Footer />
       </div>
     );
   }
