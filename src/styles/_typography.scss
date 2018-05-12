@@ -1,0 +1,8 @@
+$base-font-size: 16px;
+$base-font: 'Open Sans', sans-serif;
+$custom-font: 'Fredoka One', cursive;
+
+h1 {
+    font-size: $base-font-size * 4;
+    font-family: $custom-font;
+}

@@ -1,0 +1,21 @@
+@import "variables";
+@import "colors";
+@import "typography";
+
+body {
+  background-color: $primary-color;
+}
+
+header {
+  margin: $base-margin * 2 0;
+}
+
+.control-label {
+    width: 100%;
+}
+
+.btn {
+  margin: $base-margin * 1.25 0;
+  min-width: $btn-width;
+  float: left;
+}
